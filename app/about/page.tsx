@@ -7,7 +7,7 @@ export default function AboutPage() {
         center of devotion, culture, and peace for all. The temple will follow the traditional Kerala-style
         architecture honoring Lord Ayyappa’s divine presence.
       </p>
-      <p>We will post new things daily</p>
+      <p>We will post new things daily om sree swamiye saranam ayyappa</p>
     </div>
   );
 }
