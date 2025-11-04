@@ -18,7 +18,7 @@ const DonationsPage = () => {
         🙏 మా దాతలందరికీ హృదయపూర్వక ధన్యవాదాలు 🙏
       </h1>
       <p className="text-white text-lg mb-10">
-        May Lord Ayyappa bless all devotees who contributed to the temple construction.
+        May Lord Ayyappa Swamy bless all devotees who contributed to the temple construction.
       </p>
 
       {/* Donor Grid */}
