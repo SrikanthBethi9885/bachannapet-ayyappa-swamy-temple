@@ -20,12 +20,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Compile fetchRepos.ts to JS
-        run: npx tsc -p scripts/tsconfig.json
-
-      - name: Run compiled JS script
-        run: node dist/fetchRepos.js
-
       - name: Commit and Push
         run: |
           git config user.name "GitHub Action"
