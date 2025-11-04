@@ -1,65 +1,70 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const goshaList = [
+    "స్వామియే శరణమయ్యప్ప 🙏",
+    "హరి హర సుతనే శరణమయ్యప్ప 🙏",
+    "ఆపద్భాందవనే శరణమయ్యప్ప 🙏",
+    "అనాధరక్షకనే శరణమయ్యప్ప 🙏",
+    "అన్నదాన ప్రభువే శరణమయ్యప్ప 🙏",
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  // Auto-slide every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % goshaList.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [goshaList.length]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* Telugu Gosha Slider */}
+      <section className="relative w-full max-w-4xl mx-auto mt-12 py-16 px-4 rounded-2xl bg-gradient-to-b from-black via-[#FF9933]/40 to-black text-center shadow-lg overflow-hidden">
+        {goshaList.map((gosha, index) => (
+          <p
+            key={index}
+            className={`absolute inset-0 flex justify-center items-center text-3xl sm:text-4xl md:text-5xl font-bold transition-opacity duration-1000 ${index === current ? "opacity-100" : "opacity-0"
+              } text-[#FFD700] drop-shadow-[0_0_10px_#FF9933]`}
+          >
+            {gosha}
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+        ))}
+
+        {/* Dots Indicator */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+          {goshaList.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrent(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === current ? "bg-[#FFD700] scale-125" : "bg-gray-500"
+                }`}
             />
-            Deploy Now
-          </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Hero Section */}
+      <section className="text-center py-20 bg-gradient-to-b from-black via-[#FF9933]/60 to-black">
+        <h1 className="text-4xl font-bold text-[#FFD700] drop-shadow-lg">
+          శ్రీ అయ్యప్ప స్వామి దేవస్థానం
+        </h1>
+        <p className="mt-4 text-lg text-white max-w-xl mx-auto">
+          మన పవిత్రమైన ఆలయం నిర్మాణంలో ఉంది.
+          అయ్యప్ప భక్తులతో కలిసి ఈ దివ్య క్షేత్రాన్ని నిర్మిద్దాం 🙏
+        </p>
+        <div className="mt-6">
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/donations"
+            className="bg-[#FFD700] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#FF9933] transition"
           >
-            Documentation
+            ఆలయ నిర్మాణానికి సహకరించండి
           </a>
         </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
